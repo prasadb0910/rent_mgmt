@@ -1,0 +1,135 @@
+                                                        BANK OF MAHARASHTRA
+   
+Report Generate Date:-  11/23/2016 03:17:16 PM 
+Account No.:- 60160081819
+Statement From:- To  
+Account Holder Name:-PRAGNA KIRTI KEDIA      Branch No.:-00002 
+Loan Approved Amount:- 45000000
+Current Balance (In Rs.):  33813763     Current Status:- Partially Advanced
+   
+                                                     ACCOUNT TRANSACTION REPORT
+--------------------------------------------------------------------------------------------------------------------
+   
+Sr.No. TXN DATE   DESCRIPTION                   CHQ NO         AMOUNT Dr          AMOUNT Cr            BALANCE
+---------------------------------------------------------------------------------------------------------------------
+   
+1      25-Jan-2014    Ref. No. AS3/ADV/HSG/P                     28,100.00                               28,100.00
+2      25-Jan-2014    Ref. No. AS3/ADV/HSG/P                     11,240.00                               39,340.00
+3      25-Jan-2014    CHARGES RECOVERED FRM                                          39,340.00                0.00
+4      25-Jan-2014    LOAN DISBURSEMENT FRM                  20,000,000.00                           20,000,000.00
+5      31-Jan-2014    PART PERIOD INTEREST/B                     41,233.00                           20,041,233.00
+6      03-Feb-2014    FUNDS TRF FR HSG LN 60                                         41,233.00       20,000,000.00
+7      03-Feb-2014    FUNDS TRF FR HSG LN 60                                        415,767.00       19,584,233.00
+8      28-Feb-2014    PART PERIOD INTEREST/B                    161,772.00                           19,746,005.00
+9      01-Mar-2014    O.S. PRINCIPAL REPAY B                                        161,772.00       19,584,233.00
+10     01-Mar-2014    OFF SYSTEM  DEPOSIT TR                                        295,228.00       19,289,005.00
+11     31-Mar-2014    PART PERIOD INTEREST/B                    176,111.00                           19,465,116.00
+12     01-Apr-2014    O.S. PRINCIPAL REPAY B                                        176,111.00       19,289,005.00
+13     01-Apr-2014    OFF SYSTEM  DEPOSIT TR                                        280,889.00       19,008,116.00
+14     30-Apr-2014    PART PERIOD INTEREST/B                    168,730.00                           19,176,846.00
+15     03-May-2014    O.S. PRINCIPAL REPAY B                                        168,730.00       19,008,116.00
+16     03-May-2014    OFF SYSTEM  DEPOSIT TR                                        288,270.00       18,719,846.00
+17     31-May-2014    PART PERIOD INTEREST/B                    173,573.00                           18,893,419.00
+18     01-Jun-2014    O.S. PRINCIPAL REPAY B                                        173,573.00       18,719,846.00
+19     01-Jun-2014    OFF SYSTEM  DEPOSIT TR                                        283,427.00       18,436,419.00
+20     03-Jun-2014    HSG LOAN DISB OF PRAGN                  3,750,000.00                           22,186,419.00
+21     10-Jun-2014    LOAN DISB OF PRAGNA KI                  5,000,000.00                           27,186,419.00
+22     10-Jun-2014    LOAN DISB OF PRAGNA KI                  5,000,000.00                           32,186,419.00
+23     10-Jun-2014    LOAN DISB OF PRAGNA KI                  5,000,000.00                           37,186,419.00
+24     10-Jun-2014    LOAN DISB OF PRAGNA KI                  3,699,636.00                           40,886,055.00
+25     30-Jun-2014    PART PERIOD INTEREST/B                    313,796.00                           41,199,851.00
+26     01-Jul-2014    O.S. PRINCIPAL REPAY B                                        313,796.00       40,886,055.00
+27     01-Jul-2014    OFF SYSTEM  DEPOSIT TR                                        143,204.00       40,742,851.00
+28     14-Jul-2014    TL REPYMNT 60160081819                                      2,000,000.00       38,742,851.00
+29     31-Jul-2014    PART PERIOD INTEREST/B                    366,428.00                           39,109,279.00
+30     01-Aug-2014    O.S. PRINCIPAL REPAY B                                        366,428.00       38,742,851.00
+31     01-Aug-2014    OFF SYSTEM  DEPOSIT TR                                         90,572.00       38,652,279.00
+32     16-Aug-2014    TRF TO LOAN AC 6016008                                      1,000,000.00       37,652,279.00
+33     31-Aug-2014    PART PERIOD INTEREST/B                    353,047.00                           38,005,326.00
+34     01-Sep-2014    O.S. PRINCIPAL REPAY B                                        353,047.00       37,652,279.00
+35     01-Sep-2014    OFF SYSTEM  DEPOSIT TR                                        103,953.00       37,548,326.00
+36     30-Sep-2014    PART PERIOD INTEREST/B                    336,392.00                           37,884,718.00
+37     01-Oct-2014    O.S. PRINCIPAL REPAY B                                        336,392.00       37,548,326.00
+38     01-Oct-2014    OFF SYSTEM  DEPOSIT TR                                        120,608.00       37,427,718.00
+39     31-Oct-2014    PART PERIOD INTEREST/B                    346,488.00                           37,774,206.00
+40     01-Nov-2014    O.S. PRINCIPAL REPAY B                                        346,488.00       37,427,718.00
+41     01-Nov-2014    OFF SYSTEM  DEPOSIT TR                                        110,512.00       37,317,206.00
+42     30-Nov-2014    PART PERIOD INTEREST/B                    334,321.00                           37,651,527.00
+43     01-Dec-2014    O.S. PRINCIPAL REPAY B                                        334,321.00       37,317,206.00
+44     01-Dec-2014    OFF SYSTEM  DEPOSIT TR                                        122,679.00       37,194,527.00
+45     31-Dec-2014    PART PERIOD INTEREST/B                    341,731.00                           37,536,258.00
+46     01-Jan-2015    O.S. PRINCIPAL REPAY B                                        341,731.00       37,194,527.00
+47     01-Jan-2015    OFF SYSTEM  DEPOSIT TR                                        115,269.00       37,079,258.00
+48     31-Jan-2015    PART PERIOD INTEREST/B                    338,539.00                           37,417,797.00
+49     01-Feb-2015    O.S. PRINCIPAL REPAY B                                        338,539.00       37,079,258.00
+50     01-Feb-2015    OFF SYSTEM  DEPOSIT TR                                        118,461.00       36,960,797.00
+51     28-Feb-2015    PART PERIOD INTEREST/B                    304,800.00                           37,265,597.00
+52     01-Mar-2015    O.S. PRINCIPAL REPAY B                                        304,800.00       36,960,797.00
+53     01-Mar-2015    OFF SYSTEM  DEPOSIT TR                                        152,200.00       36,808,597.00
+54     31-Mar-2015    PART PERIOD INTEREST/B                    336,068.00                           37,144,665.00
+55     01-Apr-2015    O.S. PRINCIPAL REPAY B                                        336,068.00       36,808,597.00
+56     01-Apr-2015    OFF SYSTEM  DEPOSIT TR                                        120,932.00       36,687,665.00
+57     30-Apr-2015    PART PERIOD INTEREST/B                    324,158.00                           37,011,823.00
+58     01-May-2015    O.S. PRINCIPAL REPAY B                                        324,158.00       36,687,665.00
+59     01-May-2015    OFF SYSTEM  DEPOSIT TR                                        132,842.00       36,554,823.00
+60     31-May-2015    PART PERIOD INTEREST/B                    333,751.00                           36,888,574.00
+61     01-Jun-2015    O.S. PRINCIPAL REPAY B                                        333,751.00       36,554,823.00
+62     01-Jun-2015    OFF SYSTEM  DEPOSIT TR                                        123,249.00       36,431,574.00
+63     30-Jun-2015    PART PERIOD INTEREST/B                    314,410.00                           36,745,984.00
+64     17-Jul-2015    HSG LOAN REPYMNT 60160                                        314,410.00       36,431,574.00
+65     17-Jul-2015    HSG LOAN REPYMNT 60160                                        142,590.00       36,288,984.00
+66     31-Jul-2015    PART PERIOD INTEREST/B                    325,722.00                           36,614,706.00
+67     01-Aug-2015    O.S. PRINCIPAL REPAY B                                        325,722.00       36,288,984.00
+68     01-Aug-2015    OFF SYSTEM  DEPOSIT TR                                        131,278.00       36,157,706.00
+69     31-Aug-2015    PART PERIOD INTEREST/B                    322,447.00                           36,480,153.00
+70     01-Sep-2015    O.S. PRINCIPAL REPAY B                                        322,447.00       36,157,706.00
+71     01-Sep-2015    OFF SYSTEM  DEPOSIT TR                                        134,553.00       36,023,153.00
+72     30-Sep-2015    PART PERIOD INTEREST/B                    310,885.00                           36,334,038.00
+73     01-Oct-2015    O.S. PRINCIPAL REPAY B                                        310,885.00       36,023,153.00
+74     01-Oct-2015    OFF SYSTEM  DEPOSIT TR                                        146,115.00       35,877,038.00
+75     31-Oct-2015    PART PERIOD INTEREST/B                    311,983.00                           36,189,021.00
+76     01-Nov-2015    O.S. PRINCIPAL REPAY B                                        311,983.00       35,877,038.00
+77     01-Nov-2015    OFF SYSTEM  DEPOSIT TR                                        145,017.00       35,732,021.00
+78     30-Nov-2015    PART PERIOD INTEREST/B                    299,562.00                           36,031,583.00
+79     01-Dec-2015    O.S. PRINCIPAL REPAY B                                        299,562.00       35,732,021.00
+80     01-Dec-2015    OFF SYSTEM  DEPOSIT TR                                        157,438.00       35,574,583.00
+81     31-Dec-2015    PART PERIOD INTEREST/B                    308,183.00                           35,882,766.00
+82     01-Jan-2016    O.S. PRINCIPAL REPAY B                                        308,183.00       35,574,583.00
+83     01-Jan-2016    OFF SYSTEM  DEPOSIT TR                                        148,817.00       35,425,766.00
+84     31-Jan-2016    PART PERIOD INTEREST/B                    306,894.00                           35,732,660.00
+85     01-Feb-2016    O.S. PRINCIPAL REPAY B                                        306,894.00       35,425,766.00
+86     01-Feb-2016    OFF SYSTEM  DEPOSIT TR                                        150,106.00       35,275,660.00
+87     29-Feb-2016    PART PERIOD INTEREST/B                    285,878.00                           35,561,538.00
+88     01-Mar-2016    O.S. PRINCIPAL REPAY B                                        285,878.00       35,275,660.00
+89     01-Mar-2016    OFF SYSTEM  DEPOSIT TR                                        171,122.00       35,104,538.00
+90     31-Mar-2016    PART PERIOD INTEREST/B                    304,111.00                           35,408,649.00
+91     01-Apr-2016    O.S. PRINCIPAL REPAY B                                        304,111.00       35,104,538.00
+92     01-Apr-2016    OFF SYSTEM  DEPOSIT TR                                        152,889.00       34,951,649.00
+93     30-Apr-2016    PART PERIOD INTEREST/B                    293,019.00                           35,244,668.00
+94     01-May-2016    O.S. PRINCIPAL REPAY B                                        293,019.00       34,951,649.00
+95     01-May-2016    OFF SYSTEM  DEPOSIT TR                                        163,981.00       34,787,668.00
+96     31-May-2016    PART PERIOD INTEREST/B                    301,366.00                           35,089,034.00
+97     01-Jun-2016    O.S. PRINCIPAL REPAY B                                        301,366.00       34,787,668.00
+98     01-Jun-2016    OFF SYSTEM  DEPOSIT TR                                        155,634.00       34,632,034.00
+99     30-Jun-2016    PART PERIOD INTEREST/B                    290,340.00                           34,922,374.00
+100    01-Jul-2016    O.S. PRINCIPAL REPAY B                                        290,340.00       34,632,034.00
+101    01-Jul-2016    OFF SYSTEM  DEPOSIT TR                                        166,660.00       34,465,374.00
+102    31-Jul-2016    PART PERIOD INTEREST/B                    298,574.00                           34,763,948.00
+103    01-Aug-2016    O.S. PRINCIPAL REPAY B                                        298,574.00       34,465,374.00
+104    01-Aug-2016    OFF SYSTEM  DEPOSIT TR                                        158,426.00       34,306,948.00
+105    31-Aug-2016    PART PERIOD INTEREST/B                    297,202.00                           34,604,150.00
+106    01-Sep-2016    O.S. PRINCIPAL REPAY B                                        297,202.00       34,306,948.00
+107    01-Sep-2016    OFF SYSTEM  DEPOSIT TR                                        159,798.00       34,147,150.00
+108    30-Sep-2016    PART PERIOD INTEREST/B                    286,275.00                           34,433,425.00
+109    01-Oct-2016    O.S. PRINCIPAL REPAY B                                        286,275.00       34,147,150.00
+110    01-Oct-2016    OFF SYSTEM  DEPOSIT TR                                        170,725.00       33,976,425.00
+111    31-Oct-2016    PART PERIOD INTEREST/B                    294,338.00                           34,270,763.00
+112    01-Nov-2016    O.S. PRINCIPAL REPAY B                                        294,338.00       33,976,425.00
+113    01-Nov-2016    OFF SYSTEM  DEPOSIT TR                                        162,662.00       33,813,763.00
+-------------------------------------------------------------------------------------------------------------------
+                                                                End Of Report
+Please Note That:=
+1.Data is Validated upto Last Successful Backup taken on:- 11/22/2016(mm/dd/yyyy)
+2. This statement includes uncleared balance also. Exact amount of Uncleared balance is to be Ascertained from branch. 
+3.Txn Date:= The date when the transaction in the account entered 
+4.AVB. BALANCE:= For Loan /CC Account the balance shown in AVAILABLE BALANCE is Debit Balance.
