@@ -71,7 +71,7 @@ class Accounting extends CI_Controller
          echo $url;  
     }
 
-    function getBankEntryDetails($type='', $status='', $contact_id='', $transaction='', $property_id='', $sub_property_id='', $accounting_id=''){
+    function getBankEntryDetails($type='', $status='', $contact_id='', $transaction='', $property_id='', $sub_property_id='', $accounting_id='', $sch_id=''){
         $gid=$this->session->userdata('groupid');
         $roleid=$this->session->userdata('role_id');
         $session_id=$this->session->userdata('session_id');
@@ -82,7 +82,7 @@ class Accounting extends CI_Controller
             if($result[0]->r_view==1 or $result[0]->r_insert==1 or $result[0]->r_edit==1 or $result[0]->r_delete==1 or $result[0]->r_approvals==1){
                 $data['access']=$result;
 
-                $data['property_details']=$this->accounting_model->getBankEntryDetails($type, $status, $contact_id, $transaction, $property_id, $sub_property_id, $accounting_id);
+                $data['property_details']=$this->accounting_model->getBankEntryDetails($type, $status, $contact_id, $transaction, $property_id, $sub_property_id, $accounting_id, $sch_id);
 
                 $property_id=$data['property_details']['property_id'];
 
@@ -472,7 +472,7 @@ class Accounting extends CI_Controller
         }
     }
 
-    public function edit($type='', $status='', $contact_id='', $transaction='', $property_id='', $sub_property_id='', $accounting_id=''){
+    public function edit($type='', $status='', $contact_id='', $transaction='', $property_id='', $sub_property_id='', $accounting_id='', $sch_id=''){
         $gid=$this->session->userdata('groupid');
         $roleid=$this->session->userdata('role_id');
         $session_id=$this->session->userdata('session_id');
@@ -482,7 +482,7 @@ class Accounting extends CI_Controller
         if(count($result)>0) {
             if($result[0]->r_view==1 or $result[0]->r_insert==1 or $result[0]->r_edit==1 or $result[0]->r_delete==1 or $result[0]->r_approvals==1){
 
-                $data = $this->getBankEntryDetails($type, $status, $contact_id, $transaction, $property_id, $sub_property_id, $accounting_id);
+                $data = $this->getBankEntryDetails($type, $status, $contact_id, $transaction, $property_id, $sub_property_id, $accounting_id, $sch_id);
 
                 $data['method'] = 'edit';
 
@@ -496,7 +496,7 @@ class Accounting extends CI_Controller
         }
     }
 
-    public function view($type='', $status='', $contact_id='', $transaction='', $property_id='', $sub_property_id='', $accounting_id=''){
+    public function view($type='', $status='', $contact_id='', $transaction='', $property_id='', $sub_property_id='', $accounting_id='', $sch_id=''){
         $gid=$this->session->userdata('groupid');
         $roleid=$this->session->userdata('role_id');
         $session_id=$this->session->userdata('session_id');
@@ -505,7 +505,7 @@ class Accounting extends CI_Controller
         $result=$query->result();
         if(count($result)>0) {
             if($result[0]->r_view==1 or $result[0]->r_insert==1 or $result[0]->r_edit==1 or $result[0]->r_delete==1 or $result[0]->r_approvals==1){
-                $data = $this->getBankEntryDetails($type, $status, $contact_id, $transaction, $property_id, $sub_property_id, $accounting_id);
+                $data = $this->getBankEntryDetails($type, $status, $contact_id, $transaction, $property_id, $sub_property_id, $accounting_id, $sch_id);
 
                 load_view('accounting/accounting_view',$data);
             } else {
@@ -992,146 +992,146 @@ class Accounting extends CI_Controller
     }
 
     // function edit(){
-    //     $gid=$this->session->userdata('groupid');
-    //     $roleid=$this->session->userdata('role_id');
-    //     $session_id=$this->session->userdata('session_id');
-    //     $data['bankEntryBy']=$this->session->userdata('session_id');
-    //     $query=$this->db->query("SELECT * FROM user_role_options WHERE section = 'BankEntry' AND role_id='$roleid'");
-    //     $result=$query->result();
-    //     if(count($result)>0) {
-    //         if($result[0]->r_edit==1){
-    //             $data['access']=$result;
+        //     $gid=$this->session->userdata('groupid');
+        //     $roleid=$this->session->userdata('role_id');
+        //     $session_id=$this->session->userdata('session_id');
+        //     $data['bankEntryBy']=$this->session->userdata('session_id');
+        //     $query=$this->db->query("SELECT * FROM user_role_options WHERE section = 'BankEntry' AND role_id='$roleid'");
+        //     $result=$query->result();
+        //     if(count($result)>0) {
+        //         if($result[0]->r_edit==1){
+        //             $data['access']=$result;
 
-    //             $fk_txn_id=$this->uri->segment(3);
-    //             $accounting_id=$this->uri->segment(4);
-    //             $entry_type=$this->uri->segment(5);
+        //             $fk_txn_id=$this->uri->segment(3);
+        //             $accounting_id=$this->uri->segment(4);
+        //             $entry_type=$this->uri->segment(5);
 
-    //             $fk_txn_id=explode("_",$fk_txn_id);
-    //             if($fk_txn_id[0]=='o'){
-    //                 $fk_txn_id=implode('_',$fk_txn_id);
-    //                 $data['property_details']=$this->accounting_model->getOtherExpenseDetail($fk_txn_id, $accounting_id, $entry_type);
+        //             $fk_txn_id=explode("_",$fk_txn_id);
+        //             if($fk_txn_id[0]=='o'){
+        //                 $fk_txn_id=implode('_',$fk_txn_id);
+        //                 $data['property_details']=$this->accounting_model->getOtherExpenseDetail($fk_txn_id, $accounting_id, $entry_type);
 
-    //                 $property_id=$data['property_details']['property_id'];
-    //                 $data['property']=$this->purchase_model->purchaseData("Approved");
+        //                 $property_id=$data['property_details']['property_id'];
+        //                 $data['property']=$this->purchase_model->purchaseData("Approved");
 
-    //                 $sql="select txn_id as sub_property_id, sp_name from sub_property_allocation where property_id='$property_id' and txn_status='Approved'";
-    //                 $query=$this->db->query($sql);
-    //                 $data['sub_property']=$query->result();
+        //                 $sql="select txn_id as sub_property_id, sp_name from sub_property_allocation where property_id='$property_id' and txn_status='Approved'";
+        //                 $query=$this->db->query($sql);
+        //                 $data['sub_property']=$query->result();
 
-    //                 $sql="select * from expense_category_master where g_id='$gid'";
-    //                 $query=$this->db->query($sql);
-    //                 $data['expense_category']=$query->result();
+        //                 $sql="select * from expense_category_master where g_id='$gid'";
+        //                 $query=$this->db->query($sql);
+        //                 $data['expense_category']=$query->result();
 
-    //                 $data['property_details']['other_schedule']='false';
-    //             } else if($fk_txn_id[0]=='t'){
-    //                 $fk_txn_id=implode('_',$fk_txn_id);
-    //                 $data['property_details']=$this->accounting_model->getOtherScheduleDetail($fk_txn_id, $accounting_id, $entry_type);
+        //                 $data['property_details']['other_schedule']='false';
+        //             } else if($fk_txn_id[0]=='t'){
+        //                 $fk_txn_id=implode('_',$fk_txn_id);
+        //                 $data['property_details']=$this->accounting_model->getOtherScheduleDetail($fk_txn_id, $accounting_id, $entry_type);
 
-    //                 $property_id=$data['property_details']['property_id'];
-    //                 $data['property']=$this->purchase_model->purchaseData("Approved");
+        //                 $property_id=$data['property_details']['property_id'];
+        //                 $data['property']=$this->purchase_model->purchaseData("Approved");
 
-    //                 $sql="select txn_id as sub_property_id, sp_name from sub_property_allocation where property_id='$property_id' and txn_status='Approved'";
-    //                 $query=$this->db->query($sql);
-    //                 $data['sub_property']=$query->result();
+        //                 $sql="select txn_id as sub_property_id, sp_name from sub_property_allocation where property_id='$property_id' and txn_status='Approved'";
+        //                 $query=$this->db->query($sql);
+        //                 $data['sub_property']=$query->result();
 
-    //                 $data['property_details']['other_schedule']='true';
-    //             } else {
-    //                 $fk_txn_id=implode('_',$fk_txn_id);
-    //                 $data['property_details']=$this->accounting_model->getAllPropertyDetail($fk_txn_id, $accounting_id, $entry_type);
-    //                 $property_id=$data['property_details']['property_id'];
-    //                 $data['sub_property']=array();
+        //                 $data['property_details']['other_schedule']='true';
+        //             } else {
+        //                 $fk_txn_id=implode('_',$fk_txn_id);
+        //                 $data['property_details']=$this->accounting_model->getAllPropertyDetail($fk_txn_id, $accounting_id, $entry_type);
+        //                 $property_id=$data['property_details']['property_id'];
+        //                 $data['sub_property']=array();
 
-    //                 if(isset($data['property_details']['purchase'])){
-    //                     if($data['property_details']['purchase']=='selected'){
-    //                         $data['property']=$this->purchase_model->purchaseData("Approved");
-    //                     }
-    //                 }
-    //                 if(isset($data['property_details']['sale'])){
-    //                     if($data['property_details']['sale']=='selected'){
-    //                         $data['property']=$this->sales_model->salesData("Approved");
-    //                         $data['sub_property']=$this->sales_model->salesData("Approved", $property_id);
-    //                     }
-    //                 } 
-    //                 if(isset($data['property_details']['rent'])){
-    //                     if($data['property_details']['rent']=='selected') {
-    //                         $data['property']=$this->rent_model->rentData("Approved");
-    //                         $data['sub_property']=$this->rent_model->rentData("Approved", $property_id);
-    //                     }
-    //                 } 
-    //                 if(isset($data['property_details']['expense'])){
-    //                     if($data['property_details']['expense']=='selected'){
-    //                         $data['property']=$this->expense_model->expenseData("Approved");
-    //                         $data['sub_property']=$this->expense_model->expenseData("Approved", $property_id);
-    //                     }
-    //                 } 
-    //                 if(isset($data['property_details']['maintenance'])){
-    //                     if($data['property_details']['maintenance']=='selected'){
-    //                         $data['property']=$this->maintenance_model->maintenanceDataForBankEntry("Approved");
-    //                         $data['sub_property']=$this->maintenance_model->maintenanceDataForBankEntry("Approved", $property_id);
-    //                     }
-    //                 }
+        //                 if(isset($data['property_details']['purchase'])){
+        //                     if($data['property_details']['purchase']=='selected'){
+        //                         $data['property']=$this->purchase_model->purchaseData("Approved");
+        //                     }
+        //                 }
+        //                 if(isset($data['property_details']['sale'])){
+        //                     if($data['property_details']['sale']=='selected'){
+        //                         $data['property']=$this->sales_model->salesData("Approved");
+        //                         $data['sub_property']=$this->sales_model->salesData("Approved", $property_id);
+        //                     }
+        //                 } 
+        //                 if(isset($data['property_details']['rent'])){
+        //                     if($data['property_details']['rent']=='selected') {
+        //                         $data['property']=$this->rent_model->rentData("Approved");
+        //                         $data['sub_property']=$this->rent_model->rentData("Approved", $property_id);
+        //                     }
+        //                 } 
+        //                 if(isset($data['property_details']['expense'])){
+        //                     if($data['property_details']['expense']=='selected'){
+        //                         $data['property']=$this->expense_model->expenseData("Approved");
+        //                         $data['sub_property']=$this->expense_model->expenseData("Approved", $property_id);
+        //                     }
+        //                 } 
+        //                 if(isset($data['property_details']['maintenance'])){
+        //                     if($data['property_details']['maintenance']=='selected'){
+        //                         $data['property']=$this->maintenance_model->maintenanceDataForBankEntry("Approved");
+        //                         $data['sub_property']=$this->maintenance_model->maintenanceDataForBankEntry("Approved", $property_id);
+        //                     }
+        //                 }
 
-    //                 $data['property_details']['other_schedule']='false';
-    //             }
-                
-    //             $data['maker_checker'] = $this->session->userdata('maker_checker');
+        //                 $data['property_details']['other_schedule']='false';
+        //             }
+                    
+        //             $data['maker_checker'] = $this->session->userdata('maker_checker');
 
-    //             $sql = "select * from 
-    //                     (select A.c_id, case when A.c_owner_type='individual' 
-    //                         then concat(ifnull(A.c_name,''),' ',ifnull(A.c_last_name,'')) 
-    //                         else concat(ifnull(A.c_company_name,''),' - ',ifnull(B.c_name,''),' ',ifnull(B.c_last_name,'')) end as contact_name 
-    //                     from contact_master A left join contact_master B on (A.c_contact_id=B.c_id) 
-    //                     where A.c_status='Approved' and A.c_gid='$gid') A order by A.contact_name";
-    //             $query=$this->db->query($sql);
-    //             $result=$query->result();
-    //             $data['contact']=$result;
+        //             $sql = "select * from 
+        //                     (select A.c_id, case when A.c_owner_type='individual' 
+        //                         then concat(ifnull(A.c_name,''),' ',ifnull(A.c_last_name,'')) 
+        //                         else concat(ifnull(A.c_company_name,''),' - ',ifnull(B.c_name,''),' ',ifnull(B.c_last_name,'')) end as contact_name 
+        //                     from contact_master A left join contact_master B on (A.c_contact_id=B.c_id) 
+        //                     where A.c_status='Approved' and A.c_gid='$gid') A order by A.contact_name";
+        //             $query=$this->db->query($sql);
+        //             $result=$query->result();
+        //             $data['contact']=$result;
 
-    //             $query=$this->db->query("select distinct owner_id from user_role_owners where user_id = '$session_id'");
-    //             $result=$query->result();
-    //             if (count($result)>0) {
-    //                 $query=$this->db->query("select A.b_id, concat(B.contact_name, ' - ', A.b_name, ' - ', A.b_accountnumber) as bank_detail from 
-    //                                         (select b_id, b_ownerid, b_name, b_accountnumber from bank_master 
-    //                                             where b_status='Approved' and b_gid='$gid' and 
-    //                                             b_ownerid in(select distinct owner_id from user_role_owners where user_id = '$session_id')) A 
-    //                                         left join 
-    //                                         (select A.c_id, case when A.c_owner_type='individual' 
-    //                                             then concat(ifnull(A.c_name,''),' ',ifnull(A.c_last_name,'')) 
-    //                                             else concat(ifnull(A.c_company_name,''),' - ',ifnull(B.c_name,''),' ',ifnull(B.c_last_name,'')) end as contact_name 
-    //                                         from contact_master A left join contact_master B on (A.c_contact_id=B.c_id) 
-    //                                         where A.c_status='Approved' and A.c_gid='$gid') B 
-    //                                         on (A.b_ownerid=B.c_id)
-    //                                         order by bank_detail");
-    //                 $result=$query->result();
-    //                 $data['banks']=$result;
-    //             } else {
-    //                 $query=$this->db->query("select A.b_id, concat(B.contact_name, ' - ', A.b_name, ' - ', A.b_accountnumber) as bank_detail from 
-    //                                         (select b_id, b_ownerid, b_name, b_accountnumber from bank_master where b_status='Approved' and b_gid='$gid') A 
-    //                                         left join 
-    //                                         (select A.c_id, case when A.c_owner_type='individual' 
-    //                                             then concat(ifnull(A.c_name,''),' ',ifnull(A.c_last_name,'')) 
-    //                                             else concat(ifnull(A.c_company_name,''),' - ',ifnull(B.c_name,''),' ',ifnull(B.c_last_name,'')) end as contact_name 
-    //                                         from contact_master A left join contact_master B on (A.c_contact_id=B.c_id) 
-    //                                         where A.c_status='Approved' and A.c_gid='$gid') B 
-    //                                         on (A.b_ownerid=B.c_id)
-    //                                         order by bank_detail");
-    //                 $result=$query->result();
-    //                 $data['banks']=$result;
-    //             }
+        //             $query=$this->db->query("select distinct owner_id from user_role_owners where user_id = '$session_id'");
+        //             $result=$query->result();
+        //             if (count($result)>0) {
+        //                 $query=$this->db->query("select A.b_id, concat(B.contact_name, ' - ', A.b_name, ' - ', A.b_accountnumber) as bank_detail from 
+        //                                         (select b_id, b_ownerid, b_name, b_accountnumber from bank_master 
+        //                                             where b_status='Approved' and b_gid='$gid' and 
+        //                                             b_ownerid in(select distinct owner_id from user_role_owners where user_id = '$session_id')) A 
+        //                                         left join 
+        //                                         (select A.c_id, case when A.c_owner_type='individual' 
+        //                                             then concat(ifnull(A.c_name,''),' ',ifnull(A.c_last_name,'')) 
+        //                                             else concat(ifnull(A.c_company_name,''),' - ',ifnull(B.c_name,''),' ',ifnull(B.c_last_name,'')) end as contact_name 
+        //                                         from contact_master A left join contact_master B on (A.c_contact_id=B.c_id) 
+        //                                         where A.c_status='Approved' and A.c_gid='$gid') B 
+        //                                         on (A.b_ownerid=B.c_id)
+        //                                         order by bank_detail");
+        //                 $result=$query->result();
+        //                 $data['banks']=$result;
+        //             } else {
+        //                 $query=$this->db->query("select A.b_id, concat(B.contact_name, ' - ', A.b_name, ' - ', A.b_accountnumber) as bank_detail from 
+        //                                         (select b_id, b_ownerid, b_name, b_accountnumber from bank_master where b_status='Approved' and b_gid='$gid') A 
+        //                                         left join 
+        //                                         (select A.c_id, case when A.c_owner_type='individual' 
+        //                                             then concat(ifnull(A.c_name,''),' ',ifnull(A.c_last_name,'')) 
+        //                                             else concat(ifnull(A.c_company_name,''),' - ',ifnull(B.c_name,''),' ',ifnull(B.c_last_name,'')) end as contact_name 
+        //                                         from contact_master A left join contact_master B on (A.c_contact_id=B.c_id) 
+        //                                         where A.c_status='Approved' and A.c_gid='$gid') B 
+        //                                         on (A.b_ownerid=B.c_id)
+        //                                         order by bank_detail");
+        //                 $result=$query->result();
+        //                 $data['banks']=$result;
+        //             }
 
-    //             $sql="select * from expense_category_master where g_id='$gid'";
-    //             $query=$this->db->query($sql);
-    //             $data['expense_category']=$query->result();
+        //             $sql="select * from expense_category_master where g_id='$gid'";
+        //             $query=$this->db->query($sql);
+        //             $data['expense_category']=$query->result();
 
-    //             // echo json_encode($data);
+        //             // echo json_encode($data);
 
-    //             load_view('accounting/accounting_details',$data);
-    //         } else {
-    //             echo "Unauthorized access";
-    //         }
-    //     } else {
-    //         echo '<script>alert("You donot have access to this page.");</script>';
-    //         $this->load->view('login/main_page');
-    //     }
+        //             load_view('accounting/accounting_details',$data);
+        //         } else {
+        //             echo "Unauthorized access";
+        //         }
+        //     } else {
+        //         echo '<script>alert("You donot have access to this page.");</script>';
+        //         $this->load->view('login/main_page');
+        //     }
     // }
 
     function bankEntry(){
@@ -2521,9 +2521,9 @@ class Accounting extends CI_Controller
             $data['pendingbankentry']=array();
             $data['pendingotherentry']=array();
 
-            if(strtolower($status)!='unpaid'){
-                $data['bankentry']=$this->accounting_model->bankentryData($status, $property_id, $contact_id);
-            }
+            // if(strtolower($status)!='unpaid'){
+            //     $data['bankentry']=$this->accounting_model->bankentryData($status, $property_id, $contact_id);
+            // }
 
             if(strtolower($status)=='all' || strtolower($status)=='unpaid'){
                 $data['pendingbankentry']=$this->accounting_model->getPendingBankEntry($status, $property_id, $contact_id);
@@ -2537,8 +2537,6 @@ class Accounting extends CI_Controller
 
             $data['pendingbankentry']=array_merge($data['pendingbankentry'],$data['pendingotherentry']);
             
-            // $count_data=$this->accounting_model->getAllCountData();
-
             $count_data=$this->accounting_model->bankentryData('All', $property_id, $contact_id);
             $all=0;
             $unpaid=0;
@@ -2595,61 +2593,59 @@ class Accounting extends CI_Controller
             $data['checkstatus'] = $status;
             $data['maker_checker'] = $this->session->userdata('maker_checker');
 
-            $bankentry = $data['bankentry'];
+            // $bankentry = $data['bankentry'];
             $pendingbankentry=$data['pendingbankentry'];
             $accounting_data = array();
 
             $j=0; 
-            for ($i=0; $i < count($bankentry) ; $i++) 
-            { 
-                if($bankentry[$i]['particulars']=='Rent' || $bankentry[$i]['particulars']=='Sale' || $bankentry[$i]['particulars']=='Income' || $bankentry[$i]['particulars']=='Adhoc' && $bankentry[$i]['table_type']=='receipt') {
-                        $duedate =  ($bankentry[$i]['due_date']!=null && $bankentry[$i]['due_date']!='')?date('Y-m-d 00:00:00',strtotime($bankentry[$i]['due_date'])):'';
+            // for ($i=0; $i < count($bankentry) ; $i++) 
+            // { 
+            //     if($bankentry[$i]['particulars']=='Rent' || $bankentry[$i]['particulars']=='Sale' || $bankentry[$i]['particulars']=='Income' || $bankentry[$i]['particulars']=='Adhoc' && $bankentry[$i]['table_type']=='receipt') {
+            //             $duedate =  ($bankentry[$i]['due_date']!=null && $bankentry[$i]['due_date']!='')?date('Y-m-d 00:00:00',strtotime($bankentry[$i]['due_date'])):'';
 
-                        $row = array(
-                                '<span class="btn btn-success paid" >Paid</span>',
-                                '<input type="hidden" id="type_'.$j.'" value="View" />
-                                 <input type="hidden" id="status_'.$j.'" value="paid" />
-                                 <input type="hidden" id="prop_id_'.$j.'" value="'.$bankentry[$i]['prop_id'].'" />
-                                 <input type="hidden" id="particular_'.$j.'" value="'.$bankentry[$i]['particulars'].'" />
-                                 <input type="hidden" id="bal_amount_'.$j.'" value="'.format_money($bankentry[$i]['bal_amount'],2).'" />
-                                 <input type="hidden" id="net_amount_'.$j.'" value="'.format_money($bankentry[$i]['net_amount'],2).'" />
-                                 <input type="hidden" id="due_date_'.$j.'" value="'.($bankentry[$i]['due_date']!=null && $bankentry[$i]['due_date']!=''?date('d/m/Y',strtotime($bankentry[$i]['due_date'])):'').'">
-                                 <input type="hidden" id="link_'.$j.'" value="'.base_url().'index.php/Accounting/view/receipt/'.$bankentry[$i]['txn_status'].'/'.$bankentry[$i]['contact_id'].'/'.$bankentry[$i]['transaction'].'/'.($bankentry[$i]['property_id']==''?'0':$bankentry[$i]['property_id']).'/'.($bankentry[$i]['sub_property_id']==''?'0':$bankentry[$i]['sub_property_id']).'/'.($bankentry[$i]['accounting_id']==''?'0':$bankentry[$i]['accounting_id']).'" />
-                                 <input type="hidden" id="property_name_'.$j.'" value="'.(isset($bankentry[$i]['property'])?$bankentry[$i]['property']:'').'" />
-                                 <input type="hidden" id="sub_property_name_'.$j.'" value="'.(isset($bankentry[$i]['sub_property'])?$bankentry[$i]['sub_property']:'').'" />
-                                 <input type="hidden" id="owner_name_'.$j.'" value='.(isset($bankentry[$i]['owner_name'])?$bankentry[$i]['owner_name']:'').'" />
-                                 <input type="hidden" id="payer_name_'.$j.'" value="'.(isset($bankentry[$i]['payer_name'])?$bankentry[$i]['payer_name']:'').'" />
-                                 <input type="hidden" id="address_'.$j.'" value="'.(isset($bankentry[$i]['p_address'])?$bankentry[$i]['p_address']:'').'" />
-                                 <a  style="color: #41a541!important;cursor: pointer!important;"  id="details_'.$j.'" onclick="get_details(this);" data-target="#modalSlideLeft" data-toggle="modal">Details </a>',
-                                 ''.($bankentry[$i]['due_date']!=null && $bankentry[$i]['due_date']!='')?date('d/m/Y',strtotime($bankentry[$i]['due_date'])):''.'',
-                                 ''.$bankentry[$i]['particulars'].'',
-                                 ''.(isset($bankentry[$i]['payer_name'])?$bankentry[$i]['payer_name']:'').'',
-                                 ''. $bankentry[$i]['property'].'',
-                                 ''. $bankentry[$i]['sub_property'].'',
-                                 ''.format_money($bankentry[$i]['net_amount'],2).'',
-                                 ''.format_money($bankentry[$i]['paid_amount'],2).'',
-                                 ''.isset($bankentry[$i]['bal_amount'])?format_money($bankentry[$i]['bal_amount'],2):''.'',
-                                 ''.$duedate.'',
-                            );
-                        $accounting_data[] = $row;
-                        $j++;
-                }
-            }
+            //             $row = array(
+            //                     '<span class="btn btn-success paid" >Paid</span>',
+            //                     '<input type="hidden" id="type_'.$j.'" value="View" />
+            //                      <input type="hidden" id="status_'.$j.'" value="paid" />
+            //                      <input type="hidden" id="prop_id_'.$j.'" value="'.$bankentry[$i]['prop_id'].'" />
+            //                      <input type="hidden" id="particular_'.$j.'" value="'.$bankentry[$i]['particulars'].'" />
+            //                      <input type="hidden" id="bal_amount_'.$j.'" value="'.format_money($bankentry[$i]['bal_amount'],2).'" />
+            //                      <input type="hidden" id="net_amount_'.$j.'" value="'.format_money($bankentry[$i]['net_amount'],2).'" />
+            //                      <input type="hidden" id="due_date_'.$j.'" value="'.($bankentry[$i]['due_date']!=null && $bankentry[$i]['due_date']!=''?date('d/m/Y',strtotime($bankentry[$i]['due_date'])):'').'">
+            //                      <input type="hidden" id="link_'.$j.'" value="'.base_url().'index.php/Accounting/view/receipt/'.$bankentry[$i]['txn_status'].'/'.$bankentry[$i]['contact_id'].'/'.$bankentry[$i]['transaction'].'/'.($bankentry[$i]['property_id']==''?'0':$bankentry[$i]['property_id']).'/'.($bankentry[$i]['sub_property_id']==''?'0':$bankentry[$i]['sub_property_id']).'/'.($bankentry[$i]['accounting_id']==''?'0':$bankentry[$i]['accounting_id']).'" />
+            //                      <input type="hidden" id="property_name_'.$j.'" value="'.(isset($bankentry[$i]['property'])?$bankentry[$i]['property']:'').'" />
+            //                      <input type="hidden" id="sub_property_name_'.$j.'" value="'.(isset($bankentry[$i]['sub_property'])?$bankentry[$i]['sub_property']:'').'" />
+            //                      <input type="hidden" id="owner_name_'.$j.'" value='.(isset($bankentry[$i]['owner_name'])?$bankentry[$i]['owner_name']:'').'" />
+            //                      <input type="hidden" id="payer_name_'.$j.'" value="'.(isset($bankentry[$i]['payer_name'])?$bankentry[$i]['payer_name']:'').'" />
+            //                      <input type="hidden" id="address_'.$j.'" value="'.(isset($bankentry[$i]['p_address'])?$bankentry[$i]['p_address']:'').'" />
+            //                      <a  style="color: #41a541!important;cursor: pointer!important;"  id="details_'.$j.'" onclick="get_details(this);" data-target="#modalSlideLeft" data-toggle="modal">Details </a>',
+            //                      ''.($bankentry[$i]['due_date']!=null && $bankentry[$i]['due_date']!='')?date('d/m/Y',strtotime($bankentry[$i]['due_date'])):''.'',
+            //                      ''.$bankentry[$i]['particulars'].'',
+            //                      ''.(isset($bankentry[$i]['payer_name'])?$bankentry[$i]['payer_name']:'').'',
+            //                      ''. $bankentry[$i]['property'].'',
+            //                      ''. $bankentry[$i]['sub_property'].'',
+            //                      ''.format_money($bankentry[$i]['net_amount'],2).'',
+            //                      ''.format_money($bankentry[$i]['paid_amount'],2).'',
+            //                      ''.isset($bankentry[$i]['bal_amount'])?format_money($bankentry[$i]['bal_amount'],2):''.'',
+            //                      ''.$duedate.'',
+            //                 );
+            //             $accounting_data[] = $row;
+            //             $j++;
+            //     }
+            // }
 
-          
-            for ($i=0; $i < count($pendingbankentry) ; $i++) 
-            { 
-               if($pendingbankentry[$i]['particulars']=='Rent' || $pendingbankentry[$i]['particulars']=='Sale' || $pendingbankentry[$i]['particulars']=='Income' || $pendingbankentry[$i]['particulars']=='Adhoc' && $pendingbankentry[$i]['table_type']=='receipt')
-                {
+            
+            for ($i=0; $i < count($pendingbankentry) ; $i++) { 
+                if($pendingbankentry[$i]['particulars']=='Rent' || $pendingbankentry[$i]['particulars']=='Sale' || $pendingbankentry[$i]['particulars']=='Income' || $pendingbankentry[$i]['particulars']=='Adhoc' && $pendingbankentry[$i]['table_type']=='receipt') {
                     $duedate =  ($pendingbankentry[$i]['due_date']!=null && $pendingbankentry[$i]['due_date']!='')?date('Y-m-d 00:00:00',strtotime($pendingbankentry[$i]['due_date'])):''; 
 
-                       if($pendingbankentry[$i]['transaction']=='adhoc'){
-                         $input = ' <input type="hidden" id="link_'.$j.'" value="'.base_url().'index.php/Accounting/edit/receipt/'.$pendingbankentry[$i]['txn_status'].'/'.$pendingbankentry[$i]['contact_id'].'/'.$pendingbankentry[$i]['transaction'].'/'.($pendingbankentry[$i]['property_id']==''?'0':$pendingbankentry[$i]['property_id']).'/'.($pendingbankentry[$i]['sub_property_id']==''?'0':$pendingbankentry[$i]['sub_property_id']).($pendingbankentry[$i]['txn_status']=='Approved'?'/'.$pendingbankentry[$i]['accounting_id']:'').'" />';
-
-                        }else{
-                            $input = ' <input type="hidden" id="link_'.$j.'" value="'.base_url().'index.php/Accounting/edit/receipt/'.$pendingbankentry[$i]['txn_status'].'/'.$pendingbankentry[$i]['contact_id'].'/'.$pendingbankentry[$i]['transaction'].'/'.($pendingbankentry[$i]['property_id']==''?'0':$pendingbankentry[$i]['property_id']).'/'.($pendingbankentry[$i]['sub_property_id']==''?'0':$pendingbankentry[$i]['sub_property_id']).($pendingbankentry[$i]['txn_status']!='Approved'?'/'.$pendingbankentry[$i]['accounting_id']:'').'" />';
-                        }
-                     $row = array(
+                    if($pendingbankentry[$i]['transaction']=='adhoc'){
+                        $input = ' <input type="hidden" id="link_'.$j.'" value="'.base_url().'index.php/Accounting/edit/receipt/'.$pendingbankentry[$i]['txn_status'].'/'.$pendingbankentry[$i]['contact_id'].'/'.$pendingbankentry[$i]['transaction'].'/'.($pendingbankentry[$i]['property_id']==''?'0':$pendingbankentry[$i]['property_id']).'/'.($pendingbankentry[$i]['sub_property_id']==''?'0':$pendingbankentry[$i]['sub_property_id']).'/'.($pendingbankentry[$i]['accounting_id']==''?'0':$pendingbankentry[$i]['accounting_id']).'/'.($pendingbankentry[$i]['sch_id']==''?'0':$pendingbankentry[$i]['sch_id']).'" />';
+                    } else {
+                        $input = ' <input type="hidden" id="link_'.$j.'" value="'.base_url().'index.php/Accounting/edit/receipt/'.$pendingbankentry[$i]['txn_status'].'/'.$pendingbankentry[$i]['contact_id'].'/'.$pendingbankentry[$i]['transaction'].'/'.($pendingbankentry[$i]['property_id']==''?'0':$pendingbankentry[$i]['property_id']).'/'.($pendingbankentry[$i]['sub_property_id']==''?'0':$pendingbankentry[$i]['sub_property_id']).'/'.($pendingbankentry[$i]['accounting_id']==''?'0':$pendingbankentry[$i]['accounting_id']).'/'.($pendingbankentry[$i]['sch_id']==''?'0':$pendingbankentry[$i]['sch_id']).'" />';
+                    }
+                    
+                    $row = array(
                         '<span class="btn btn-danger unpaid" >Unpaid</span>',
                         '<input type="hidden" id="type_'.$j.'" value="Receive" />
                         <input type="hidden" id="type_2_'.$j.'" value="View" />
@@ -2661,7 +2657,7 @@ class Accounting extends CI_Controller
                         <input type="hidden" id="net_amount_'.$j.'" value="'.format_money($pendingbankentry[$i]['net_amount'],2).'" />
                         <input type="hidden" id="due_date_'.$j.'" value="'.($pendingbankentry[$i]['due_date']!=null && $pendingbankentry[$i]['due_date']!=''?date('d/m/Y',strtotime($pendingbankentry[$i]['due_date'])):'').'" />
                         '.$input.'
-                        <input type="hidden" id="link_2_'.$j.'" value="'.base_url().'index.php/Accounting/viewOtherSchedule/receipt/'.$pendingbankentry[$i]['txn_status'].'/'.$pendingbankentry[$i]['contact_id'].'/'.$pendingbankentry[$i]['transaction'].'/'.($pendingbankentry[$i]['property_id']==''?'0':$pendingbankentry[$i]['property_id']).'/'.($pendingbankentry[$i]['sub_property_id']==''?'0':$pendingbankentry[$i]['sub_property_id']).($pendingbankentry[$i]['txn_status']!='Approved'?'/'.$pendingbankentry[$i]['accounting_id']:'').'" />
+                        <input type="hidden" id="link_2_'.$j.'" value="'.base_url().'index.php/Accounting/viewOtherSchedule/receipt/'.$pendingbankentry[$i]['txn_status'].'/'.$pendingbankentry[$i]['contact_id'].'/'.$pendingbankentry[$i]['transaction'].'/'.($pendingbankentry[$i]['property_id']==''?'0':$pendingbankentry[$i]['property_id']).'/'.($pendingbankentry[$i]['sub_property_id']==''?'0':$pendingbankentry[$i]['sub_property_id']).'/'.($pendingbankentry[$i]['accounting_id']==''?'0':$pendingbankentry[$i]['accounting_id']).'/'.($pendingbankentry[$i]['sch_id']==''?'0':$pendingbankentry[$i]['sch_id']).'" />
                         <input type="hidden" id="owner_name_'.$j.'" value="'.(isset($pendingbankentry[$i]['owner_name'])?$pendingbankentry[$i]['owner_name']:'').'"/>
                         <input type="hidden" id="payer_name_'.$j.'" value="'.(isset($pendingbankentry[$i]['payer_name'])?$pendingbankentry[$i]['payer_name']:'').'"/>
                         <input type="hidden" id="property_name_'.$j.'" value="'.(isset($pendingbankentry[$i]['property'])?$pendingbankentry[$i]['property']:'').'"/>
@@ -2720,9 +2716,9 @@ class Accounting extends CI_Controller
             $data['pendingbankentry']=array();
             $data['pendingotherentry']=array();
 
-            if(strtolower($status)!='unpaid'){
-                $data['bankentry']=$this->accounting_model->bankentryData($status, $property_id, $contact_id);
-            }
+            // if(strtolower($status)!='unpaid'){
+            //     $data['bankentry']=$this->accounting_model->bankentryData($status, $property_id, $contact_id);
+            // }
 
             if(strtolower($status)=='all' || strtolower($status)=='unpaid'){
                 $data['pendingbankentry']=$this->accounting_model->getPendingBankEntry($status, $property_id, $contact_id);
@@ -2794,48 +2790,48 @@ class Accounting extends CI_Controller
             $data['checkstatus'] = $status;
             $data['maker_checker'] = $this->session->userdata('maker_checker');
 
-            $bankentry = $data['bankentry'];
+            // $bankentry = $data['bankentry'];
             $pendingbankentry=$data['pendingbankentry'];
             $accounting_data = array();
 
             $j=0; 
-           for ($i=0; $i < count($bankentry) ; $i++) 
-            { 
-               if($bankentry[$i]['particulars']=='Purchase' || $bankentry[$i]['particulars']=='Loan' || $bankentry[$i]['particulars']=='Expense' || $bankentry[$i]['particulars']=='Maintenance' ||  $bankentry[$i]['particulars']=='Adhoc' && $bankentry[$i]['table_type']=='payment') {
+            // for ($i=0; $i < count($bankentry) ; $i++) 
+            // { 
+            //    if($bankentry[$i]['particulars']=='Purchase' || $bankentry[$i]['particulars']=='Loan' || $bankentry[$i]['particulars']=='Expense' || $bankentry[$i]['particulars']=='Maintenance' ||  $bankentry[$i]['particulars']=='Adhoc' && $bankentry[$i]['table_type']=='payment') {
 
-                    $duedate =  ($bankentry[$i]['due_date']!=null && $bankentry[$i]['due_date']!='')?date('Y-m-d 00:00:00',strtotime($bankentry[$i]['due_date'])):'';
+            //         $duedate =  ($bankentry[$i]['due_date']!=null && $bankentry[$i]['due_date']!='')?date('Y-m-d 00:00:00',strtotime($bankentry[$i]['due_date'])):'';
 
-                        $row = array(
-                                '<span class="btn btn-success paid" >Paid</span>',
-                                '<input type="hidden" id="type_0'.$j.'" value="View" />
-                                 <input type="hidden" id="status_0'.$j.'" value="paid" />
-                                 <input type="hidden" id="prop_id_0'.$j.'" value="'.$bankentry[$i]['prop_id'].'" />
-                                 <input type="hidden" id="particular_0'.$j.'" value="'.$bankentry[$i]['particulars'].'" />
-                                 <input type="hidden" id="bal_amount_0'.$j.'" value="'.format_money($bankentry[$i]['bal_amount'],2).'" />
-                                 <input type="hidden" id="net_amount_0'.$j.'" value="'.format_money($bankentry[$i]['net_amount'],2).'" />
-                                 <input type="hidden" id="due_date_0'.$j.'" value="'.($bankentry[$i]['due_date']!=null && $bankentry[$i]['due_date']!=''?date('d/m/Y',strtotime($bankentry[$i]['due_date'])):'').'">
-                                 <input type="hidden" id="link_0'.$j.'" value='.base_url().'index.php/Accounting/view/payment/'.$bankentry[$i]['txn_status'].'/'.$bankentry[$i]['contact_id'].'/'.$bankentry[$i]['transaction'].'/'.($bankentry[$i]['property_id']==''?'0':$bankentry[$i]['property_id']).'/'.($bankentry[$i]['sub_property_id']==''?'0':$bankentry[$i]['sub_property_id']).'/'.($bankentry[$i]['accounting_id']==''?'0':$bankentry[$i]['accounting_id']).'" />
-                                 <input type="hidden" id="link_0'.$j.'" value="'.base_url().'index.php/Accounting/view/payment/'.$bankentry[$i]['txn_status'].'/'.$bankentry[$i]['contact_id'].'/'.$bankentry[$i]['transaction'].'/'.($bankentry[$i]['property_id']==''?'0':$bankentry[$i]['property_id']).'/'.($bankentry[$i]['sub_property_id']==''?'0':$bankentry[$i]['sub_property_id']).'/'.($bankentry[$i]['accounting_id']==''?'0':$bankentry[$i]['accounting_id']).'" />
-                                 <input type="hidden" id="property_name_0'.$j.'" value="'.(isset($bankentry[$i]['property'])?$bankentry[$i]['property']:'').'" />
-                                 <input type="hidden" id="sub_property_name_0'.$j.'" value="'.(isset($bankentry[$i]['sub_property'])?$bankentry[$i]['sub_property']:'').'" />
-                                 <input type="hidden" id="owner_name_0'.$j.'" value="'.(isset($bankentry[$i]['owner_name'])?$bankentry[$i]['owner_name']:'').'" />
-                                 <input type="hidden" id="payer_name_0'.$j.'" value="'.(isset($bankentry[$i]['payer_name'])?$bankentry[$i]['payer_name']:'').'" />
-                                 <input type="hidden" id="address_0'.$j.'" value="'.(isset($bankentry[$i]['p_address'])?$bankentry[$i]['p_address']:'').'" />
-                                 <a  style="color: #41a541!important;cursor: pointer!important;"  id="details_0'.$j.'" onclick="get_details(this);" data-target="#modalSlideLeft" data-toggle="modal">Details </a>',
-                                 ''.($bankentry[$i]['due_date']!=null && $bankentry[$i]['due_date']!='')?date('d/m/Y',strtotime($bankentry[$i]['due_date'])):''.'',
-                                 ''.$bankentry[$i]['particulars'].'',
-                                 ''.(isset($bankentry[$i]['payer_name'])?$bankentry[$i]['payer_name']:'').'',
-                                 ''. $bankentry[$i]['property'].'',
-                                 ''. $bankentry[$i]['sub_property'].'',
-                                 ''.format_money($bankentry[$i]['net_amount'],2).'',
-                                 ''.format_money($bankentry[$i]['paid_amount'],2).'',
-                                 ''.isset($bankentry[$i]['bal_amount'])?format_money($bankentry[$i]['bal_amount'],2):''.'',
-                                 ''.$duedate.'',
-                            );
-                        $accounting_data[] = $row;
-                        $j++;
-                }
-            }
+            //             $row = array(
+            //                     '<span class="btn btn-success paid" >Paid</span>',
+            //                     '<input type="hidden" id="type_0'.$j.'" value="View" />
+            //                      <input type="hidden" id="status_0'.$j.'" value="paid" />
+            //                      <input type="hidden" id="prop_id_0'.$j.'" value="'.$bankentry[$i]['prop_id'].'" />
+            //                      <input type="hidden" id="particular_0'.$j.'" value="'.$bankentry[$i]['particulars'].'" />
+            //                      <input type="hidden" id="bal_amount_0'.$j.'" value="'.format_money($bankentry[$i]['bal_amount'],2).'" />
+            //                      <input type="hidden" id="net_amount_0'.$j.'" value="'.format_money($bankentry[$i]['net_amount'],2).'" />
+            //                      <input type="hidden" id="due_date_0'.$j.'" value="'.($bankentry[$i]['due_date']!=null && $bankentry[$i]['due_date']!=''?date('d/m/Y',strtotime($bankentry[$i]['due_date'])):'').'">
+            //                      <input type="hidden" id="link_0'.$j.'" value='.base_url().'index.php/Accounting/view/payment/'.$bankentry[$i]['txn_status'].'/'.$bankentry[$i]['contact_id'].'/'.$bankentry[$i]['transaction'].'/'.($bankentry[$i]['property_id']==''?'0':$bankentry[$i]['property_id']).'/'.($bankentry[$i]['sub_property_id']==''?'0':$bankentry[$i]['sub_property_id']).'/'.($bankentry[$i]['accounting_id']==''?'0':$bankentry[$i]['accounting_id']).'" />
+            //                      <input type="hidden" id="link_0'.$j.'" value="'.base_url().'index.php/Accounting/view/payment/'.$bankentry[$i]['txn_status'].'/'.$bankentry[$i]['contact_id'].'/'.$bankentry[$i]['transaction'].'/'.($bankentry[$i]['property_id']==''?'0':$bankentry[$i]['property_id']).'/'.($bankentry[$i]['sub_property_id']==''?'0':$bankentry[$i]['sub_property_id']).'/'.($bankentry[$i]['accounting_id']==''?'0':$bankentry[$i]['accounting_id']).'" />
+            //                      <input type="hidden" id="property_name_0'.$j.'" value="'.(isset($bankentry[$i]['property'])?$bankentry[$i]['property']:'').'" />
+            //                      <input type="hidden" id="sub_property_name_0'.$j.'" value="'.(isset($bankentry[$i]['sub_property'])?$bankentry[$i]['sub_property']:'').'" />
+            //                      <input type="hidden" id="owner_name_0'.$j.'" value="'.(isset($bankentry[$i]['owner_name'])?$bankentry[$i]['owner_name']:'').'" />
+            //                      <input type="hidden" id="payer_name_0'.$j.'" value="'.(isset($bankentry[$i]['payer_name'])?$bankentry[$i]['payer_name']:'').'" />
+            //                      <input type="hidden" id="address_0'.$j.'" value="'.(isset($bankentry[$i]['p_address'])?$bankentry[$i]['p_address']:'').'" />
+            //                      <a  style="color: #41a541!important;cursor: pointer!important;"  id="details_0'.$j.'" onclick="get_details(this);" data-target="#modalSlideLeft" data-toggle="modal">Details </a>',
+            //                      ''.($bankentry[$i]['due_date']!=null && $bankentry[$i]['due_date']!='')?date('d/m/Y',strtotime($bankentry[$i]['due_date'])):''.'',
+            //                      ''.$bankentry[$i]['particulars'].'',
+            //                      ''.(isset($bankentry[$i]['payer_name'])?$bankentry[$i]['payer_name']:'').'',
+            //                      ''. $bankentry[$i]['property'].'',
+            //                      ''. $bankentry[$i]['sub_property'].'',
+            //                      ''.format_money($bankentry[$i]['net_amount'],2).'',
+            //                      ''.format_money($bankentry[$i]['paid_amount'],2).'',
+            //                      ''.isset($bankentry[$i]['bal_amount'])?format_money($bankentry[$i]['bal_amount'],2):''.'',
+            //                      ''.$duedate.'',
+            //                 );
+            //             $accounting_data[] = $row;
+            //             $j++;
+            //     }
+            // }
 
             for ($i=0; $i < count($pendingbankentry) ; $i++) 
             { 
@@ -2843,7 +2839,7 @@ class Accounting extends CI_Controller
                 {
                     $duedate =  ($pendingbankentry[$i]['due_date']!=null && $pendingbankentry[$i]['due_date']!='')?date('Y-m-d 00:00:00',strtotime($pendingbankentry[$i]['due_date'])):''; 
 
-                     $row = array(
+                    $row = array(
                         '<span class="btn btn-danger unpaid" >Unpaid</span>',
                         '<input type="hidden" id="type_0'.$j.'" value="Receive" />
                         <input type="hidden" id="type_2_0'.$j.'" value="View" />
@@ -2854,8 +2850,8 @@ class Accounting extends CI_Controller
                         <input type="hidden" id="bal_amount_0'.$j.'" value="'.format_money($pendingbankentry[$i]['bal_amount'],2).'" />
                         <input type="hidden" id="net_amount_0'.$j.'" value="'.format_money($pendingbankentry[$i]['net_amount'],2).'" />
                         <input type="hidden" id="due_date_0'.$j.'" value="'.($pendingbankentry[$i]['due_date']!=null && $pendingbankentry[$i]['due_date']!=''?date('d/m/Y',strtotime($pendingbankentry[$i]['due_date'])):'').'" />
-                        <input type="hidden" id="link_0'.$j.'" value="'.base_url().'index.php/Accounting/edit/payment/'.$pendingbankentry[$i]['txn_status'].'/'.$pendingbankentry[$i]['contact_id'].'/'.$pendingbankentry[$i]['transaction'].'/'.($pendingbankentry[$i]['property_id']==''?'0':$pendingbankentry[$i]['property_id']).'/'.($pendingbankentry[$i]['sub_property_id']==''?'0':$pendingbankentry[$i]['sub_property_id']).($pendingbankentry[$i]['txn_status']!='Approved'?'/'.$pendingbankentry[$i]['accounting_id']:'').'" />
-                        <input type="hidden" id="link_2_0'.$j.'" value="'.base_url().'index.php/Accounting/viewOtherSchedule/payment/'.$pendingbankentry[$i]['txn_status'].'/'.$pendingbankentry[$i]['contact_id'].'/'.$pendingbankentry[$i]['transaction'].'/'.($pendingbankentry[$i]['property_id']==''?'0':$pendingbankentry[$i]['property_id']).'/'.($pendingbankentry[$i]['sub_property_id']==''?'0':$pendingbankentry[$i]['sub_property_id']).($pendingbankentry[$i]['txn_status']!='Approved'?'/'.$pendingbankentry[$i]['accounting_id']:'').'" />
+                        <input type="hidden" id="link_0'.$j.'" value="'.base_url().'index.php/Accounting/edit/payment/'.$pendingbankentry[$i]['txn_status'].'/'.$pendingbankentry[$i]['contact_id'].'/'.$pendingbankentry[$i]['transaction'].'/'.($pendingbankentry[$i]['property_id']==''?'0':$pendingbankentry[$i]['property_id']).'/'.($pendingbankentry[$i]['sub_property_id']==''?'0':$pendingbankentry[$i]['sub_property_id']).'/'.($pendingbankentry[$i]['accounting_id']==''?'0':$pendingbankentry[$i]['accounting_id']).'/'.($pendingbankentry[$i]['sch_id']==''?'0':$pendingbankentry[$i]['sch_id']).'" />
+                        <input type="hidden" id="link_2_0'.$j.'" value="'.base_url().'index.php/Accounting/viewOtherSchedule/payment/'.$pendingbankentry[$i]['txn_status'].'/'.$pendingbankentry[$i]['contact_id'].'/'.$pendingbankentry[$i]['transaction'].'/'.($pendingbankentry[$i]['property_id']==''?'0':$pendingbankentry[$i]['property_id']).'/'.($pendingbankentry[$i]['sub_property_id']==''?'0':$pendingbankentry[$i]['sub_property_id']).'/'.($pendingbankentry[$i]['accounting_id']==''?'0':$pendingbankentry[$i]['accounting_id']).'/'.($pendingbankentry[$i]['sch_id']==''?'0':$pendingbankentry[$i]['sch_id']).'" />
                         <input type="hidden" id="owner_name_0'.$j.'" value="'.(isset($pendingbankentry[$i]['owner_name'])?$pendingbankentry[$i]['owner_name']:'').'"/>
                         <input type="hidden" id="payer_name_0'.$j.'" value="'.(isset($pendingbankentry[$i]['payer_name'])?$pendingbankentry[$i]['payer_name']:'').'"/>
                         <input type="hidden" id="property_name_0'.$j.'" value="'.(isset($pendingbankentry[$i]['property'])?$pendingbankentry[$i]['property']:'').'"/>
@@ -2910,13 +2906,13 @@ class Accounting extends CI_Controller
         if(count($result)>0) {
             $data['access']=$result;
 
-            $data['bankentry']=array();
+            // $data['bankentry']=array();
             $data['pendingbankentry']=array();
             $data['pendingotherentry']=array();
 
-            if(strtolower($status)!='unpaid'){
-                $data['bankentry']=$this->accounting_model->bankentryData($status, $property_id, $contact_id);
-            }
+            // if(strtolower($status)!='unpaid'){
+            //     $data['bankentry']=$this->accounting_model->bankentryData($status, $property_id, $contact_id);
+            // }
 
             if(strtolower($status)=='all' || strtolower($status)=='unpaid'){
                 $data['pendingbankentry']=$this->accounting_model->getPendingBankEntry($status, $property_id, $contact_id);

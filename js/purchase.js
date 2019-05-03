@@ -168,7 +168,7 @@ function savetemp() {
         }
 
         var sch_type=$('input[name="sch_type[]"]').map(function(){return $(this).val();}).get();
-        console.log(sch_type.length);
+        // console.log(sch_type.length);
         var j=1;
         for(var i=0;i<sch_type.length;++i){
             //console.log("step1");
@@ -264,7 +264,7 @@ jQuery(function(){
     {
        counter = counter-1;   
     }*/
-    console.log('counter'+counter);
+    // console.log('counter'+counter);
     $('#repeat-img').click(function(event){
         event.preventDefault();
 

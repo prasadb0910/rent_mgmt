@@ -1392,5 +1392,9 @@ class Rent extends CI_Controller
         $this->rent_model->send_rent_intimation('24');
     }
 
+    public function schedule_test(){
+        $this->rent_model->setSchedule('55', 'Approved');
+    }
+
 }
 ?>

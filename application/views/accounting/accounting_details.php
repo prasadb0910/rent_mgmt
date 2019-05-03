@@ -27,7 +27,7 @@
 
 <?php 
 	$action = "";
-	if(isset($property_details['accounting_id']) && $property_details['accounting_id']!='') { 
+	if(isset($property_details['accounting_id']) && $property_details['accounting_id']!='' && $property_details['accounting_id']!='0') { 
 		if ($bl_other_schedue=='true') {
 			$action = base_url().'index.php/accounting/updateOtherSchedule/'.$property_details['accounting_id'].'/'.$property_details['entry_type']; 
 		} else {
@@ -276,7 +276,7 @@
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="<?php echo base_url().'index.php/Dashboard'; ?>">Dashboard</a></li>
             	<li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/accounting">Accounting</a></li>
-            	<?php if(isset($property_details['accounting_id']) && $property_details['accounting_id']!='') { ?>
+            	<?php if(isset($property_details['accounting_id']) && $property_details['accounting_id']!='' && $property_details['accounting_id']!='0') { ?>
 				<li class="breadcrumb-item"><a href="<?php //echo base_url().'index.php/accounting/bankEntryView/'.$property_details['fk_txn_id'].'/'.$property_details['accounting_id'].'/'.$property_details['entry_type']; ?>">Accounting View</a></li>
 				<?php } ?>
 				<li class="breadcrumb-item active"><?php echo $type; ?></li>
@@ -457,7 +457,7 @@
 
 
 
-												if($property_details['schedule_detail'][$i]['amount_paid']>0 && $property_details['accounting_id']=="")
+												if($property_details['schedule_detail'][$i]['amount_paid']>0 && ($property_details['accounting_id']=="" || $property_details['accounting_id']=="0"))
 												{
 													$property_details['schedule_detail'][$i]['tds_amount_paid'] = 0;
 												}
@@ -869,7 +869,7 @@
 
 												$i++;
 											}
-										} if($bl_other_schedue=="true" || $property_details['transaction']=='adhoc' && $property_details['accounting_id']=='') {
+										} if($bl_other_schedue=="true" || $property_details['transaction']=='adhoc' && ($property_details['accounting_id']=='' || $property_details['accounting_id']=='0')) {
 											$disabled='';
 
 											$tax_applied='';

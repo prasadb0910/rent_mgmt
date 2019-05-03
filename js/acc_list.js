@@ -17,7 +17,7 @@ var get_details = function(elem) {
 	var from = $('#due_date_'+index).val().split("/");
 	var f = new Date(from[2], from[1]-1, from[0]);
   	var month = f.getMonth();
-  	console.log(monthNames[month]);
+  	// console.log(monthNames[month]);
 	$('#type').attr('href', $('#link_'+index).val());
 	$('#property_name').html($('#property_name_'+index).val());
 	if($('#sub_property_name_'+index).val()!="")
@@ -55,8 +55,8 @@ var get_details = function(elem) {
 			"background-color":"#c64643!important"
 		})
 	}	
-	console.log($('#owner_name_'+index).val());
-	console.log($('#payer_name_'+index).val());
+	// console.log($('#owner_name_'+index).val());
+	// console.log($('#payer_name_'+index).val());
 }
 
 /* var d = new Date("2012/01/14");

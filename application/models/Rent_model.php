@@ -481,6 +481,8 @@ class Rent_model Extends CI_Model{
                 }
             }
 
+            $first_invoice = false;
+
             for ($i = 0; $i < $lease; $i++) {
                 if($mm==13){
                     $mm=1;
@@ -536,9 +538,25 @@ class Rent_model Extends CI_Model{
                     }
                 }
 
+                $check_date = DateTime::createFromFormat('Y-m-d', $abc);
+
+                if($check_date<$stdt){
+                    $check_date->modify('+1 month');
+                    $abc = $check_date->format('Y-m-d');
+                    $mm = $check_date->format("m");
+                    $yy = $check_date->format("Y");
+                }
+
                 $mm = $mm + $increment;
 
-                $check_date = DateTime::createFromFormat('Y-m-d', $abc);
+                // echo $check_date->format('Y-m-d H:i:s');
+                // echo '<br/>';
+                // echo $abc;
+                // echo '<br/>';
+                // echo $stdt->format('Y-m-d H:i:s');
+                // echo '<br/>';
+                // echo $mm;
+                // echo '<br/>';
 
                 $bl_insert = true;
                 if($last_event_date!=''){
@@ -572,6 +590,44 @@ class Rent_model Extends CI_Model{
                         }
                     }
 
+                    if($first_invoice==false){
+                        $difference = $stdt->diff($check_date);
+                        $no_of_days = $difference->d;
+
+                        $event_type = 'Rent';
+                        $event_name = 'Rent';
+                        $basic_cost = round($amt2*$no_of_days/30);
+
+                        // echo $stdt->format('Y-m-d H:i:s');
+                        // echo '<br/>';
+                        // echo $check_date->format('Y-m-d H:i:s');
+                        // echo '<br/>';
+                        // echo $no_of_days;
+                        // echo '<br/>';
+                        // echo $amt2;
+                        // echo '<br/>';
+                        // echo $basic_cost;
+                        // echo '<br/>';
+
+                        // $tax_amount = round($basic_cost*$gst_rate/100,2);
+                        // $net_amount = round($basic_cost + $tax_amount);
+                        // $basic_cost;
+                        $basic_cost1 = round(($basic_cost*$gst_rate)/100);//round($basic_cost/(1+($gst_rate/100)));
+                        $tax_amount = $basic_cost1 ;//round($amt2-$basic_cost1);
+                        $tds_amount = round($basic_cost*$tds_rate/100);
+                        $net_amount = $tax_amount+$basic_cost;//round($amt2+$tds_amount);
+
+                        if($basic_cost>0){
+                            $scid = $this->insert_schedule($rent_id, $event_type, $event_name, $invoice_date, $basic_cost, $net_amount, $txn_status, $tax_amount, $tds_amount);
+
+                            if($tax_amount>0){
+                                $this->insert_schedule_tax($scid, $rent_id, $event_type, $tax_id, $tax_name, $gst_rate, $tax_amount, $txn_status);
+                            }
+                        }
+
+                        $first_invoice=true;
+                    }
+
                     $event_type = 'Rent';
                     $event_name = 'Rent';
                     $basic_cost = $amt2;
@@ -589,9 +645,21 @@ class Rent_model Extends CI_Model{
                     $tds_amount = round($basic_cost*$tds_rate/100);
                     $net_amount = $tax_amount+$basic_cost;//round($amt2+$tds_amount);
 
+                    // echo $event_date;
+                    // echo '<br/>';
+                    // echo $abc;
+                    // echo '<br/>';
+                    // echo $mm;
+                    // echo '<br/>';
+                    // echo $basic_cost;
+                    // echo '<br/>';
+                    // echo $tax_amount;
+                    // echo '<br/>';
+                    // echo $net_amount;
+                    // echo '<br/>';
+
                     $scid = $this->insert_schedule($rent_id, $event_type, $event_name, $event_date, $basic_cost, $net_amount, $txn_status, $tax_amount, $tds_amount);
 
-                    $this->db->last_query();
                     if($tax_amount>0){
                         $this->insert_schedule_tax($scid, $rent_id, $event_type, $tax_id, $tax_name, $gst_rate, $tax_amount, $txn_status);
                     }
@@ -770,6 +838,8 @@ class Rent_model Extends CI_Model{
                         }
                     }
 
+                    $first_invoice = false;
+
                     for ($i = 0; $i < $lease; $i++) {
                         if($mm==13){
                             $mm=1;
@@ -825,9 +895,16 @@ class Rent_model Extends CI_Model{
                             }
                         }
 
-                        $mm = $mm + $increment;
-
                         $check_date = DateTime::createFromFormat('Y-m-d', $abc);
+
+                        if($check_date<$stdt){
+                            $check_date->modify('+1 month');
+                            $abc = $check_date->format('Y-m-d');
+                            $mm = $check_date->format("m");
+                            $yy = $check_date->format("Y");
+                        }
+
+                        $mm = $mm + $increment;
 
                         $bl_insert = true;
                         if($last_event_date!=''){
@@ -859,6 +936,44 @@ class Rent_model Extends CI_Model{
                                         }
                                     }
                                 }
+                            }
+
+                            if($first_invoice==false){
+                                $difference = $stdt->diff($check_date);
+                                $no_of_days = $difference->d;
+
+                                $event_type = 'Other';
+                                $event_name = $event_name;
+                                $basic_cost = round($amt2*$no_of_days/30);
+
+                                // echo $stdt->format('Y-m-d H:i:s');
+                                // echo '<br/>';
+                                // echo $check_date->format('Y-m-d H:i:s');
+                                // echo '<br/>';
+                                // echo $no_of_days;
+                                // echo '<br/>';
+                                // echo $amt2;
+                                // echo '<br/>';
+                                // echo $basic_cost;
+                                // echo '<br/>';
+
+                                // $tax_amount = round($basic_cost*$gst_rate/100,2);
+                                // $net_amount = round($basic_cost + $tax_amount);
+                                // $basic_cost;
+                                $basic_cost1 = round(($basic_cost*$gst_rate)/100);//round($basic_cost/(1+($gst_rate/100)));
+                                $tax_amount = $basic_cost1 ;//round($amt2-$basic_cost1);
+                                $tds_amount = round($basic_cost*$tds_rate/100);
+                                $net_amount = $tax_amount+$basic_cost;//round($amt2+$tds_amount);
+
+                                if($basic_cost>0){
+                                    $scid = $this->insert_schedule($rent_id, $event_type, $event_name, $invoice_date, $basic_cost, $net_amount, $txn_status, $tax_amount, $tds_amount);
+
+                                    if($tax_amount>0){
+                                        $this->insert_schedule_tax($scid, $rent_id, $event_type, $tax_id, $tax_name, $gst_rate, $tax_amount, $txn_status);
+                                    }
+                                }
+
+                                $first_invoice=true;
                             }
 
                             $event_type = 'Other';

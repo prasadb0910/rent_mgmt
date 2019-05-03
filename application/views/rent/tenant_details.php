@@ -607,7 +607,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group form-group-default form-group-default-select2 required">
-                                            <label>Due Day</label>
+                                            <label>Invoice Day</label>
                                             <select class="full-width" name="rent_due_day" id="rent_due_day" data-error="#err_rent_due_day" data-placeholder="Select" data-init-plugin="select2" data-minimum-results-for-search="Infinity">
                                                 <option value="">Select</option>
                                                 <?php if(isset($editrent) && count($editrent)>0) {
@@ -729,7 +729,7 @@
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group form-group-default form-group-default-select2 required">
-                                                        <label>Due Day</label>
+                                                        <label>Invoice Day</label>
                                                         <select class="full-width select2" name="other_due_day[]" id="due_day_<?php echo $j+1; ?>" data-error="#err_due_day_<?php echo $j+1; ?>" data-placeholder="Select" data-init-plugin="select2" data-minimum-results-for-search="Infinity">
                                                             <?php if(isset($other_amt_details) && count($other_amt_details)>0) {
                                                                     for($i=1; $i<=31; $i++) { 
@@ -788,7 +788,7 @@
                                                             <input type="text" class="form-control format_number" name="other_tds_rate[]" id="tds_rate_<?php echo $j+1; ?>" placeholder="Enter Here" value="<?php if(isset($other_amt_details)) { if(count($other_amt_details)>=0) { echo format_money($other_amt_details[$j]->tds_rate,2); }} ?>" style="text-align:center;" <?php if(isset($other_amt_details)) { if($other_amt_details[$j]->tds==1) echo ''; else echo 'readonly'; } else echo 'readonly'; ?> style="text-align:center;" />
                                                         </div>
                                                         <div class="input-group-addon bg-transparent h-c-50">
-                                                            <input type="hidden" name="other_tds[]" id="tds_val_<?php echo $j+1; ?>" value="<?php if(isset($other_amt_details)) { echo $other_amt_details[$j]->tds==1; } ?>" />
+                                                            <input type="hidden" name="other_tds[]" id="tds_val_<?php echo $j+1; ?>" value="<?php if(isset($other_amt_details)) { echo $other_amt_details[$j]->tds; } ?>" />
                                                             <input type="checkbox" id="tds_<?php echo $j+1; ?>" value="yes" onchange="set_tds2(this);" class="toggle"  <?php if(isset($other_amt_details)) { if($other_amt_details[$j]->tds==1) echo 'checked'; } ?> />
                                                         </div>
                                                     </div>

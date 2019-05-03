@@ -4822,8 +4822,9 @@ $("#form_rent").validate({
                         } else {
                             return false;
                         }
-                    },
-            checkDate: true
+                    }
+            //         ,
+            // checkDate: true
         },
         termination_date: {
             required: function(element) {
@@ -4984,8 +4985,8 @@ $.validator.addMethod("checkDate", function (value, element) {
 
 $('#form_rent').submit(function() {
     removeMultiInputNamingRules('#form_rent', 'select[alt="tenant[]"]');
-   // removeMultiInputNamingRules('#form_rent', 'select[alt="other_amount[]"]');
-     removeMultiInputNamingRules('#form_rent', 'input[alt="other_amount[]"]');
+    // removeMultiInputNamingRules('#form_rent', 'select[alt="other_amount[]"]');
+    removeMultiInputNamingRules('#form_rent', 'input[alt="other_amount[]"]');
 
     removeMultiInputNamingRules('#form_rent', 'select[alt="other_schedule[]"]');
     removeMultiInputNamingRules('#form_rent', 'select[alt="other_invoice_issuer[]"]');
@@ -5042,7 +5043,7 @@ $('#form_rent').submit(function() {
                                                                                     } }, "");
 																					
 																					
-  addMultiInputNamingRules('#form_rent', 'select[name="other_gst[]"]', { required: function(element) {
+    addMultiInputNamingRules('#form_rent', 'select[name="other_gst[]"]', { required: function(element) {
                                                                                         if($("#submitVal").val()=="0"){
                                                                                             return true;
                                                                                         } else {
@@ -5050,7 +5051,7 @@ $('#form_rent').submit(function() {
                                                                                         }
                                                                                     } }, "");
 
-  addMultiInputNamingRules('#form_rent', 'input[name="other_tds[]"]', { required: function(element) {
+    addMultiInputNamingRules('#form_rent', 'input[name="other_tds[]"]', { required: function(element) {
                                                                                         if($("#submitVal").val()=="0"){
                                                                                             return true;
                                                                                         } else {

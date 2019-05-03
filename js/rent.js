@@ -313,7 +313,7 @@ jQuery(function(){
                                     '</div>'+
                                     '<div class="col-md-3">'+
                                         '<div class="form-group form-group-default form-group-default-select2 required">'+
-                                            '<label>Due Day</label>'+
+                                            '<label>Invoice Day</label>'+
                                             '<select class="full-width select2" name="other_rent_due_day[]" id="rent_due_day_'+counter+'" data-error="#err_rent_due_day_'+counter+'" data-placeholder="Select" data-init-plugin="select2">'+due_day+'</select>'+
                                             '<div id="err_rent_due_day_'+counter+'"></div>'+
                                         '</div>'+
